@@ -3,31 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Examen: El Romanticismo (Funcional)</title>
+    <title>Examen: El Romanticismo (Finalizado y Registrado)</title>
+    
+    <link rel="icon" href="Empresarial.png" type="image/png">
+
     <style>
-        /* Estilos Generales y Compacidad (Mantenidos) */
+        /* ========================================================= */
+        /* ESTILOS ORIGINALES (Base) */
+        /* ========================================================= */
         body {
             font-family: 'Georgia', serif;
             line-height: 1.4; 
             margin: 0;
-            padding: 15px;
-            background-color: #f7f7f7;
+            padding: 0; 
+            background: linear-gradient(135deg, #f0f8ff 0%, #dce9f8 100%);
             font-size: 14px; 
-            min-height: 100vh;
+            min-height: 100vh; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .document-container {
             max-width: 900px;
             width: 95%;
-            margin: 0 auto;
+            margin: 20px;
             padding: 25px;
             background-color: white;
             border: 1px solid #c0c0c0;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            transition: opacity 0.5s ease-in-out;
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+            border-radius: 5px;
         }
 
-        /* Encabezado y Elementos del Formulario (Modificado para eliminar la imagen) */
+        /* Encabezado y Elementos del Formulario */
         .header {
             display: flex;
             justify-content: space-between;
@@ -36,15 +45,22 @@
             padding-bottom: 15px;
             margin-bottom: 20px;
         }
-        /* CLAVE: Reemplazamos la clase .logo por un estilo simple para un Emoji */
-        .logo-text { font-size: 40px; line-height: 1; padding: 5px; color: #1e3a5f; } 
+        /* LOGO: Clase para la imagen Empresarial.png en el encabezado */
+        .logo { 
+            width: 70px; /* Tamaño del logo */
+            height: auto; 
+            padding: 3px; 
+            border: 1px solid #e0e0e0; /* Pequeño borde para destacarlo */
+            border-radius: 5px;
+        }
         .title-block h1 { color: #1e3a5f; font-size: 24px; margin: 0; font-weight: bold; }
         .title-block h2 { color: #6c757d; font-size: 16px; margin-top: 5px; }
         .student-info { 
             margin-bottom: 20px; font-size: 15px; border: 1px solid #ddd; 
             padding: 10px 15px; background-color: #f0f8ff; line-height: 1.5;
+            border-radius: 3px;
         }
-        #studentName { border: none; border-bottom: 2px solid #1e3a5f; width: 70%; padding: 3px; font-family: inherit; font-size: 15px; font-weight: bold; }
+        #studentName { border: none; border-bottom: 2px solid #1e3a5f; background-color: transparent; width: 70%; padding: 3px; font-family: inherit; font-size: 15px; font-weight: bold; outline: none; }
         .question-list { list-style: none; padding: 0; margin: 0; }
         .question-item { margin-bottom: 18px; padding: 10px 0 10px 10px; border-left: 5px solid #1e3a5f; background-color: #ffffff; }
         .question-item p { font-weight: bold; color: #1e3a5f; margin-bottom: 10px; font-size: 16px; }
@@ -55,26 +71,39 @@
         .submit-container button {
             background-color: #1e3a5f; color: white; padding: 10px 20px;
             border: none; border-radius: 5px; cursor: pointer; font-size: 16px;
-            transition: background-color 0.3s;
+            transition: all 0.2s ease;
         }
-        .submit-container button:hover { background-color: #3f5b8c; }
+        .submit-container button:hover { 
+            background-color: #3f5b8c;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
 
-
-        /* ESTILOS PARA LA PANTALLA DE FINALIZACIÓN (Mantenidos) */
+        /* ========================================================= */
+        /* ESTILOS PARA LA PANTALLA DE FINALIZACIÓN (MEJORADOS) */
+        /* ========================================================= */
         #finalScreen {
-            display: none;
+            display: none; 
             text-align: center;
-            padding: 80px 40px;
-            background-color: #f0f8ff;
+            padding: 50px 30px;
+            background-color: #f7faff; 
             border: 4px solid #1e3a5f;
             border-radius: 15px;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-            position: absolute;
+            position: fixed; 
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%) scale(0.8);
+            opacity: 0;
+            transition: all 0.7s ease-out;
             width: 80%;
             max-width: 700px;
+            z-index: 10;
+        }
+
+        #finalScreen.visible {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
         }
 
         #finalScreen h2 {
@@ -85,23 +114,72 @@
             padding-bottom: 10px;
         }
 
-        /* Estilo para el efecto de máquina de escribir (Mantenido) */
+        /* Contenedor tipo terminal para el texto del grupo */
+        #typingContainer {
+            margin: 30px auto;
+            padding: 20px;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            max-width: 90%;
+            text-align: left;
+            border: 1px solid #ccc;
+        }
+        
+        /* Estilo para el efecto de máquina de escribir */
         #typingText {
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 20px;
+            font-family: 'Courier New', Courier, monospace; 
+            font-size: 18px;
             color: #333;
             min-height: 40px;
             white-space: pre-wrap;
             display: inline-block;
             overflow: hidden;
-            border-right: .15em solid orange;
+            border-right: .15em solid #1e3a5f;
             animation: blink-caret .75s step-end infinite;
         }
 
-        /* Animación del cursor (Mantenida) */
+        /* Animación del cursor */
         @keyframes blink-caret {
             from, to { border-color: transparent }
-            50% { border-color: orange; }
+            50% { border-color: #1e3a5f; }
+        }
+
+        /* GIF al final */
+        #namesGif {
+            margin-top: 25px; /* Espacio entre el texto y el gif */
+            max-width: 100px; /* Ajusta el tamaño del gif */
+            height: auto;
+            display: block; /* Para centrarlo */
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 5px; /* Bordes suaves para el gif */
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        /* Botón de Cierre */
+        #closeButton {
+            margin-top: 30px;
+            background-color: #dc3545;
+            color: white;
+            padding: 10px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.2s;
+        }
+        #closeButton:hover { background-color: #c82333; transform: scale(1.05); }
+
+        /* Mensaje de Registro */
+        .registro-note {
+            font-size: 13px;
+            color: #856404;
+            background-color: #fff3cd;
+            border: 1px solid #ffeeba;
+            padding: 10px;
+            margin-top: 20px;
+            border-radius: 5px;
+            text-align: left;
         }
     </style>
 </head>
@@ -114,7 +192,7 @@
                 <h2>Formulario de Autoevaluación - Total: 10 Preguntas</h2>
             </div>
             <div class="logo-container">
-                <span class="logo-text">📚</span>
+                <img src="Empresarial.png" alt="Logotipo Empresarial" class="logo">
             </div>
         </div>
 
@@ -142,7 +220,11 @@
             </ol>
 
             <div class="submit-container">
-                <button type="submit">Enviar, Corregir y Descargar Nota (TXT)</button>
+                <button type="submit">Enviar, Corregir y Descargar Notas (Doble Archivo TXT)</button>
+            </div>
+            
+            <div class="registro-note">
+                **NOTA IMPORTANTE PARA EL INSTRUCTOR:** Se descargarán **DOS** archivos. El segundo (`Registro_Notas_Romanticismo.txt`) contiene la nota a registrar. **Debe copiar su contenido** y pegarlo en su registro centralizado para acumular todas las calificaciones. 
             </div>
         </form>
         
@@ -150,23 +232,31 @@
 
     <div id="finalScreen">
         <h2>✅ Examen Finalizado con Éxito ✅</h2>
-        <div id="typingText"></div>
+        <div id="typingContainer">
+            <div id="typingText"></div>
+            <img id="namesGif" src="names.gif" alt="Animación de nombres">
+        </div>
+        <button id="closeButton" onclick="window.location.reload();">Volver a Intentar / Cerrar Página</button>
     </div>
 
 
     <script>
-        // --- 1. FUNCIÓN PARA EL EFECTO DE MÁQUINA DE ESCRIBIR (Mantenida) ---
-        function typeWriter(text, element, delay = 50) {
+        // --- 1. FUNCIÓN PARA EL EFECTO DE MÁQUINA DE ESCRIBIR ---
+        function typeWriter(text, element, delay = 40) {
             let i = 0;
-            element.innerHTML = '';
-            element.style.animation = 'blink-caret .75s step-end infinite';
+            element.innerHTML = ''; 
+            element.style.borderRight = '.15em solid #1e3a5f'; 
+            element.style.animation = 'blink-caret .75s step-end infinite'; 
             
             function typing() {
                 if (i < text.length) {
-                    if (text.charAt(i) === '\n') {
+                    const char = text.charAt(i);
+                    if (char === '*') {
+                        element.innerHTML += '•'; 
+                    } else if (char === '\n') {
                         element.innerHTML += '<br>';
                     } else {
-                        element.innerHTML += text.charAt(i);
+                        element.innerHTML += char;
                     }
                     i++;
                     setTimeout(typing, delay);
@@ -178,11 +268,26 @@
             typing();
         }
 
-        // --- 2. GESTIÓN DEL FORMULARIO Y CALIFICACIÓN (Mantenida) ---
+        // --- 2. FUNCIÓN DE DESCARGA (Centralizada) ---
+        function downloadFile(content, fileName, fileType = 'text/plain;charset=utf-8') {
+            const blob = new Blob([content], { type: fileType });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = fileName; 
+
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(a.href);
+        }
+
+        // --- 3. GESTIÓN DEL FORMULARIO Y CALIFICACIÓN ---
         document.getElementById('romanticismExamForm').addEventListener('submit', function(event) {
-            event.preventDefault();
+            event.preventDefault(); 
             
             const studentName = document.getElementById('studentName').value.trim();
+            const examContainer = document.getElementById('examContainer');
+            const finalScreen = document.getElementById('finalScreen');
             const form = event.target;
             const formData = new FormData(form);
 
@@ -191,7 +296,7 @@
                 return;
             }
 
-            // CLAVE DE RESPUESTAS
+            // CLAVE DE RESPUESTAS 
             const correctAnswers = { q1: 'B', q2: 'C', q3: 'B', q4: 'C', q5: 'C', q6: 'D', q7: 'B', q8: 'C', q9: 'C', q10: 'A' };
             const totalQuestions = 10;
             let correctCount = 0;
@@ -208,9 +313,7 @@
                         correcta: correctAnswers[questionId],
                         es_correcta: isCorrect
                     };
-                    if (isCorrect) {
-                        correctCount++;
-                    }
+                    if (isCorrect) { correctCount++; }
                 }
             }
             
@@ -219,8 +322,11 @@
             const finalGrade = 1 + (scorePercentage * 4);
             const formattedGrade = finalGrade.toFixed(2); 
 
-            // Generar contenido del archivo TXT
-            let results = `
+            
+            // =========================================================
+            // PASO A: GENERAR EL ARCHIVO INDIVIDUAL DEL ALUMNO (con detalle)
+            // =========================================================
+            let resultsAlumno = `
 ==================================================
         RESULTADO DEL EXAMEN: EL ROMANTICISMO
 ==================================================
@@ -238,39 +344,48 @@ DETALLE DE RESPUESTAS:
             for (let qId in userResponses) {
                 const response = userResponses[qId];
                 const status = response.es_correcta ? '✔️ CORRECTA' : '❌ INCORRECTA';
-                results += `
+                resultsAlumno += `
 Q${questionNumber}: ${status}
-    Respuesta Marcada: ${response.respuesta}
-    Respuesta Correcta: ${response.correcta}
+   Respuesta Marcada: ${response.respuesta}
+   Respuesta Correcta: ${response.correcta}
 --------------------------------------------------`;
                 questionNumber++;
             }
             
-            // 3. Crear y forzar la descarga del archivo TXT
-            const blob = new Blob([results], { type: 'text/plain;charset=utf-8' });
-            const a = document.createElement('a');
-            a.href = URL.createObjectURL(blob);
             const safeName = studentName.replace(/[^a-z0-9]/gi, '_').toLowerCase();
-            a.download = `Romanticismo_${safeName}.txt`; 
+            downloadFile(resultsAlumno, `Romanticismo_${safeName}.txt`);
 
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
 
+            // =========================================================
+            // PASO B: GENERAR EL ARCHIVO DE REGISTRO CENTRAL (Solo una línea)
+            // =========================================================
+            // Formato: Fecha | Nombre Estudiante (Relleno con espacios) | Nota
+            const dateStr = new Date().toLocaleDateString('es-CO');
+            // Usamos substr y padEnd para simular el formato de tabla en TXT
+            const namePadded = studentName.substr(0, 29).padEnd(30); 
+            const registroLine = `${dateStr} | ${namePadded} | Nota: ${formattedGrade} (${correctCount}/${totalQuestions})\n`;
+            
+            // Se genera el archivo de registro para que el instructor lo copie
+            downloadFile(registroLine, `Registro_Notas_Romanticismo.txt`);
+
+            
+            // =========================================================
             // 4. TRANSICIÓN A LA PANTALLA FINAL
+            // =========================================================
             
-            // Ocultar el formulario con una transición suave
-            document.getElementById('examContainer').style.opacity = '0';
-            
-            // Esperar la transición (500ms) y luego cambiar de vista
-            setTimeout(() => {
-                document.getElementById('examContainer').style.display = 'none';
-                
-                // Mostrar la pantalla final
-                const finalScreen = document.getElementById('finalScreen');
-                finalScreen.style.display = 'block';
+            alert(`¡Examen completado y CORREGIDO, ${studentName}!\n\nTu nota es: ${formattedGrade}.\n\nSe han descargado DOS archivos TXT: Tu detalle y la línea de registro. Por favor, revisa tus descargas.`);
 
-                // Texto del grupo para el efecto de escritura
+            // Ocultar el formulario con animación
+            examContainer.style.opacity = '0';
+            examContainer.style.transform = 'scale(0.95)';
+            
+            setTimeout(() => {
+                examContainer.style.display = 'none';
+                
+                // Mostrar la pantalla final con la animación de zoom
+                finalScreen.style.display = 'block';
+                finalScreen.classList.add('visible');
+
                 const groupText = 
                     `Gracias por su participación en este examen.
 
@@ -283,8 +398,14 @@ Grupo conformado por:
 * Santiago Vasquez
 * Damian Ramirez`;
                 
-                typeWriter(groupText, document.getElementById('typingText'), 40); // 40ms de retraso para hacerlo rápido
+                typeWriter(groupText, document.getElementById('typingText'), 40);
+                
+                // Mostrar el GIF después de que el texto termine de escribirse
+                const gifElement = document.getElementById('namesGif');
+                gifElement.style.display = 'block'; // Asegura que el GIF se muestre
+
             }, 500);
+
         });
     </script>
 
