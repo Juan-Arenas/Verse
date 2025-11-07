@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Examen: El Romanticismo (Finalizado)</title>
+    <style>
+        /* Estilos Generales y Compacidad (Mantenidos) */
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.4; 
+            margin: 0;
+            padding: 15px;
+            background-color: #f7f7f7;
+            font-size: 14px; 
+            min-height: 100vh; /* Asegura que ocupe toda la ventana */
+        }
+
+        .document-container {
+            max-width: 900px;
+            width: 95%;
+            margin: 0 auto;
+            padding: 25px;
+            background-color: white;
+            border: 1px solid #c0c0c0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: opacity 0.5s ease-in-out; /* Para ocultar/mostrar con suavidad */
+        }
+
+        /* Encabezado y Elementos del Formulario (Mantenidos) */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px double #1e3a5f; 
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+        .logo { width: 70px; height: auto; padding: 3px; }
+        .title-block h1 { color: #1e3a5f; font-size: 24px; margin: 0; font-weight: bold; }
+        .title-block h2 { color: #6c757d; font-size: 16px; margin-top: 5px; }
+        .student-info { 
+            margin-bottom: 20px; font-size: 15px; border: 1px solid #ddd; 
+            padding: 10px 15px; background-color: #f0f8ff; line-height: 1.5;
+        }
+        #studentName { border: none; border-bottom: 2px solid #1e3a5f; width: 70%; padding: 3px; font-family: inherit; font-size: 15px; font-weight: bold; }
+        .question-list { list-style: none; padding: 0; margin: 0; }
+        .question-item { margin-bottom: 18px; padding: 10px 0 10px 10px; border-left: 5px solid #1e3a5f; background-color: #ffffff; }
+        .question-item p { font-weight: bold; color: #1e3a5f; margin-bottom: 10px; font-size: 16px; }
+        .options-list { list-style: none; padding-left: 10px; margin-top: 0; font-size: 15px; }
+        .options-list li { margin-bottom: 5px; color: #333; }
+        .options-list input[type="radio"] { margin-right: 8px; }
+        .submit-container { text-align: center; margin-top: 30px; }
+        .submit-container button {
+            background-color: #1e3a5f; color: white; padding: 10px 20px;
+            border: none; border-radius: 5px; cursor: pointer; font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        .submit-container button:hover { background-color: #3f5b8c; }
+
+
+        /* ESTILOS PARA LA PANTALLA DE FINALIZACIÓN */
+        #finalScreen {
+            display: none; /* Inicialmente oculto */
+            text-align: center;
+            padding: 80px 40px;
+            background-color: #f0f8ff; /* Fondo interactivo */
+            border: 4px solid #1e3a5f;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            position: absolute; /* Para que ocupe la posición del formulario */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            max-width: 700px;
+        }
+
+        #finalScreen h2 {
+            font-size: 32px;
+            color: #1e3a5f;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #1e3a5f;
+            padding-bottom: 10px;
+        }
+
+        /* Estilo para el efecto de máquina de escribir */
+        #typingText {
+            font-family: 'Courier New', Courier, monospace; /* Fuente de terminal */
+            font-size: 20px;
+            color: #333;
+            min-height: 40px; /* Evita que el contenedor se colapse */
+            white-space: pre-wrap; /* Mantiene el formato de salto de línea */
+            display: inline-block;
+            overflow: hidden; /* Oculta el texto que no se ha "escrito" */
+            border-right: .15em solid orange; /* Cursor parpadeante */
+            animation: 
+                blink-caret .75s step-end infinite;
+        }
+
+        /* Animación del cursor */
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: orange; }
+        }
+    </style>
+</head>
+<body>
+    <div class="document-container" id="examContainer">
+        
+        <div class="header">
+            <div class="title-block">
+                <h1>Examen de Literatura: El Romanticismo (Siglo XIX)</h1>
+                <h2>Formulario de Autoevaluación - Total: 10 Preguntas</h2>
+            </div>
+            <div class="logo-container">
+                <img src="Empresarial.png" alt="Logotipo Empresarial" class="logo">
+            </div>
+        </div>
+
+        <form id="romanticismExamForm">
+            <div class="student-info">
+                <label for="studentName">**Nombre Completo del Estudiante:**</label> 
+                <input type="text" id="studentName" name="studentName" required>
+            </div>
+            
+            <p style="font-style: italic; margin-bottom: 20px; font-size: 14px;">
+                **Instrucciones:** Seleccione la opción que considere correcta para cada pregunta.
+            </p>
+
+            <ol class="question-list">
+                <li class="question-item"><p>1. ¿Cuál es el concepto central que el Romanticismo exalta en oposición directa a la **razón y la lógica** del Neoclasicismo?</p><ul class="options-list"><li><input type="radio" name="q1" value="A" id="q1a" required><label for="q1a">A. El 'Yo' Absoluto de Fichte.</label></li><li><input type="radio" name="q1" value="B" id="q1b"><label for="q1b">B. La Exaltación de la Emoción y la Pasión.</label></li><li><input type="radio" name="q1" value="C" id="q1c"><label for="q1c">C. La Mímesis de la Naturaleza Clásica.</label></li><li><input type="radio" name="q1" value="D" id="q1d"><label for="q1d">D. El Utilitarismo social.</label></li></ul></li>
+                <li class="question-item"><p>2. ¿Qué país europeo vio surgir a figuras clave como **Víctor Hugo** (Los Miserables) y **Alexandre Dumas** (Los tres mosqueteros)?</p><ul class="options-list"><li><input type="radio" name="q2" value="A" id="q2a" required><label for="q2a">A. Alemania.</label></li><li><input type="radio" name="q2" value="B" id="q2b"><label for="q2b">B. Reino Unido.</label></li><li><input type="radio" name="q2" value="C" id="q2c"><label for="q2c">C. Francia.</label></li><li><input type="radio" name="q2" value="D" id="q2d"><label for="q2d">D. España.</label></li></ul></li>
+                <li class="question-item"><p>3. ¿Qué autor español es reconocido por el intimismo, la sensibilidad lírica y sus obras **"Rimas" y "Leyendas"**?</p><ul class="options-list"><li><input type="radio" name="q3" value="A" id="q3a" required><label for="q3a">A. José de Espronceda.</label></li><li><input type="radio" name="q3" value="B" id="q3b"><label for="q3b">B. Gustavo Adolfo Bécquer.</label></li><li><input type="radio" name="q3" value="C" id="q3c"><label for="q3c">C. Mariano José de Larra.</label></li><li><input type="radio" name="q3" value="D" id="q3d"><label for="q3d">D. Duque de Rivas.</label></li></ul></li>
+                <li class="question-item"><p>4. ¿Qué obra gótica, considerada fundamental en el Romanticismo inglés, fue escrita por **Mary Shelley**?</p><ul class="options-list"><li><input type="radio" name="q4" value="A" id="q4a" required><label for="q4a">A. Ivanhoe.</label></li><li><input type="radio" name="q4" value="B" id="q4b"><label for="q4b">B. Don Juan.</label></li><li><input type="radio" name="q4" value="C" id="q4c"><label for="q4c">C. Frankenstein.</label></li><li><input type="radio" name="q4" value="D" id="q4d"><label for="q4d">D. Ozymandias.</label></li></ul></li>
+                <li class="question-item"><p>5. ¿Qué característica fundamental del Romanticismo se refleja en el rechazo a las convenciones sociales y políticas, llevando a la figura del **héroe marginado o solitario**?</p><ul class="options-list"><li><input type="radio" name="q5" value="A" id="q5a" required><label for="q5a">A. La Mímesis.</label></li><li><input type="radio" name="q5" value="B" id="q5b"><label for="q5b">B. El Racionalismo.</label></li><li><input type="radio" name="q5" value="C" id="q5c"><label for="q5c">C. La Rebeldía / Anticonformismo.</label></li><li><input type="radio" name="q5" value="D" id="q5d"><label for="q5d">D. El Equilibrio Formal.</label></li></ul></li>
+                <li class="question-item"><p>6. ¿Qué autor alemán, clave en el movimiento Sturm und Drang, escribió **"Fausto"** y **"Las desventuras del joven Werther"**?</p><ul class="options-list"><li><input type="radio" name="q6" value="A" id="q6a" required><label for="q6a">A. E.T.A. Hoffmann.</label></li><li><input type="radio" name="q6" value="B" id="q6b"><label for="q6b">B. Friedrich Schiller.</label></li><li><input type="radio" name="q6" value="C" id="q6c"><label for="q6c">C. Novalis.</label></li><li><input type="radio" name="q6" value="D" id="q6d"><label for="q6d">D. Johann Wolfgang von Goethe.</label></li></ul></li>
+                <li class="question-item"><p>7. La frase: "Los paisajes representan los estados de ánimo del ser humano" define la relación entre el romántico y:</p><ul class="options-list"><li><input type="radio" name="q7" value="A" id="q7a" required><label for="q7a">A. La Arquitectura Clásica.</label></li><li><input type="radio" name="q7" value="B" id="q7b"><label for="q7b">B. La Naturaleza.</label></li><li><input type="radio" name="q7" value="C" id="q7c"><label for="q7c">C. La Vida Urbana.</label></li><li><input type="radio" name="q7" value="D" id="q7d"><label for="q7d">D. Los Talleres de Arte.</label></li></ul></li>
+                <li class="question-item"><p>8. ¿Qué dramaturgo español fue el autor de **"Don Álvaro o la fuerza del sino"**, una obra central del Romanticismo español?</p><ul class="options-list"><li><input type="radio" name="q8" value="A" id="q8a" required><label for="q8a">A. José de Espronceda.</label></li><li><input type="radio" name="q8" value="B" id="q8b"><label for="q8b">B. Mariano José de Larra.</label></li><li><input type="radio" name="q8" value="C" id="q8c"><label for="q8c">C. El Duque de Rivas.</label></li><li><input type="radio" name="q8" value="D" id="q8d"><label for="q8d">D. Rosalía de Castro.</label></li></ul></li>
+                <li class="question-item"><p>9. ¿Qué artista es mencionado como representante del Romanticismo en la pintura (arte), famoso por obras como **"La maja vestida"** o **"El 3 de mayo en Madrid"**?</p><ul class="options-list"><li><input type="radio" name="q9" value="A" id="q9a" required><label for="q9a">A. Caspar David Friedrich.</label></li><li><input type="radio" name="q9" value="B" id="q9b"><label for="q9b">B. Leonardo da Vinci.</label></li><li><input type="radio" name="q9" value="C" id="q9c"><label for="q9c">C. Francisco de Goya.</label></li><li><input type="radio" name="q9" value="D" id="q9d"><label for="q9d">D. Ludwig van Beethoven.</label></li></ul></li>
+                <li class="question-item"><p>10. ¿Qué poeta inglés, célebre por su vida excéntrica y rebelde, es la máxima encarnación del "Héroe Romántico" y autor de **"Don Juan"** y **"Childe Harold"**?</p><ul class="options-list"><li><input type="radio" name="q10" value="A" id="q10a" required><label for="q10a">A. Lord Byron.</label></li><li><input type="radio" name="q10" value="B" id="q10b"><label for="q10b">B. Percy Shelley.</label></li><li><input type="radio" name="q10" value="C" id="q10c"><label for="q10c">C. John Keats.</label></li><li><input type="radio" name="q10" value="D" id="q10d"><label for="q10d">D. Walter Scott.</label></li></ul></li>
+            </ol>
+
+            <div class="submit-container">
+                <button type="submit">Enviar y Descargar Nota</button>
+            </div>
+        </form>
+        
+    </div>
+
+    <div id="finalScreen">
+        <h2>✅ Examen Finalizado con Éxito ✅</h2>
+        <div id="typingText"></div>
+    </div>
+
+
+    <script>
+        // --- 1. FUNCIÓN PARA EL EFECTO DE MÁQUINA DE ESCRIBIR ---
+        function typeWriter(text, element, delay = 50) {
+            let i = 0;
+            element.innerHTML = ''; // Limpia el contenido anterior
+            element.style.animation = 'blink-caret .75s step-end infinite'; // Reactiva el cursor
+            
+            function typing() {
+                if (i < text.length) {
+                    // Si es un salto de línea (\n), lo escribe
+                    if (text.charAt(i) === '\n') {
+                        element.innerHTML += '<br>';
+                    } else {
+                        element.innerHTML += text.charAt(i);
+                    }
+                    i++;
+                    setTimeout(typing, delay);
+                } else {
+                    // Detiene la animación del cursor al finalizar
+                    element.style.animation = 'none';
+                    element.style.borderRight = 'none';
+                }
+            }
+            typing();
+        }
+
+        // --- 2. GESTIÓN DEL FORMULARIO Y CALIFICACIÓN ---
+        document.getElementById('romanticismExamForm').addEventListener('submit', function(event) {
+            event.preventDefault(); 
+            
+            const studentName = document.getElementById('studentName').value.trim();
+            const form = event.target;
+            const formData = new FormData(form);
+
+            if (!studentName) {
+                alert('Por favor, ingresa tu Nombre Completo antes de enviar el examen.');
+                return;
+            }
+
+            // CLAVE DE RESPUESTAS (Mantenida)
+            const correctAnswers = { q1: 'B', q2: 'C', q3: 'B', q4: 'C', q5: 'C', q6: 'D', q7: 'B', q8: 'C', q9: 'C', q10: 'A' };
+            const totalQuestions = 10;
+            let correctCount = 0;
+            const userResponses = {};
+            
+            // Recopilar y Calificar
+            for (let pair of formData.entries()) {
+                if (pair[0].startsWith('q')) {
+                    const questionId = pair[0];
+                    const userAnswer = pair[1];
+                    const isCorrect = userAnswer === correctAnswers[questionId];
+                    userResponses[questionId] = {
+                        respuesta: userAnswer,
+                        correcta: correctAnswers[questionId],
+                        es_correcta: isCorrect
+                    };
+                    if (isCorrect) {
+                        correctCount++;
+                    }
+                }
+            }
+            
+            // Calcular Nota (1.0 a 5.0)
+            const scorePercentage = correctCount / totalQuestions;
+            const finalGrade = 1 + (scorePercentage * 4);
+            const formattedGrade = finalGrade.toFixed(2); 
+
+            // Generar contenido del archivo TXT (Incluye la nota)
+            let results = `
+==================================================
+        RESULTADO DEL EXAMEN: EL ROMANTICISMO
+==================================================
+Estudiante: ${studentName}
+Fecha de Envío: ${new Date().toLocaleString()}
+
+Puntuación Obtenida: ${correctCount}/${totalQuestions}
+
+NOTA FINAL: ${formattedGrade}
+==================================================
+
+DETALLE DE RESPUESTAS:
+`;
+            let questionNumber = 1;
+            for (let qId in userResponses) {
+                const response = userResponses[qId];
+                const status = response.es_correcta ? '✔️ CORRECTA' : '❌ INCORRECTA';
+                results += `
+Q${questionNumber}: ${status}
+   Respuesta Marcada: ${response.respuesta}
+   Respuesta Correcta: ${response.correcta}
+--------------------------------------------------`;
+                questionNumber++;
+            }
+            
+            // 3. Crear y forzar la descarga del archivo TXT
+            const blob = new Blob([results], { type: 'text/plain;charset=utf-8' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            const safeName = studentName.replace(/[^a-z0-9]/gi, '_').toLowerCase();
+            a.download = `Romanticismo_${safeName}.txt`; 
+
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+
+            // 4. TRANSICIÓN A LA PANTALLA FINAL
+            
+            // Ocultar el formulario con una transición suave
+            document.getElementById('examContainer').style.opacity = '0';
+            
+            // Esperar la transición (500ms) y luego cambiar de vista
+            setTimeout(() => {
+                document.getElementById('examContainer').style.display = 'none';
+                
+                // Mostrar la pantalla final
+                const finalScreen = document.getElementById('finalScreen');
+                finalScreen.style.display = 'block';
+
+                // Texto del grupo para el efecto de escritura
+                const groupText = 
+                    `Gracias por su participación en este examen.
+
+Este proyecto ha sido desarrollado por:
+* Juan Arenas
+* Victor Lopez
+* Leandro Sehuanes
+* Santiago Vasquez
+* Damian Ramirez`;
+                
+                typeWriter(groupText, document.getElementById('typingText'), 40); // 40ms de retraso para hacerlo rápido
+            }, 500);
+
+            // No limpiar el formulario aquí, sino al inicio del siguiente estudiante (si se recarga la página)
+        });
+    </script>
+
+</body>
+</html>
