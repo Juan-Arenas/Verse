@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Examen: El Romanticismo (Finalizado y Registrado)</title>
+    <title>Examen: El Romanticismo - Finalizado y Registrado</title>
     
     <link rel="icon" href="Empresarial.png" type="image/png">
 
@@ -47,10 +47,10 @@
         }
         /* LOGO: Clase para la imagen Empresarial.png en el encabezado */
         .logo { 
-            width: 70px; /* Tamaño del logo */
+            width: 70px; 
             height: auto; 
             padding: 3px; 
-            border: 1px solid #e0e0e0; /* Pequeño borde para destacarlo */
+            border: 1px solid #e0e0e0;
             border-radius: 5px;
         }
         .title-block h1 { color: #1e3a5f; font-size: 24px; margin: 0; font-weight: bold; }
@@ -80,7 +80,7 @@
         }
 
         /* ========================================================= */
-        /* ESTILOS PARA LA PANTALLA DE FINALIZACIÓN (MEJORADOS) */
+        /* ESTILOS PARA LA PANTALLA DE FINALIZACIÓN */
         /* ========================================================= */
         #finalScreen {
             display: none; 
@@ -144,15 +144,15 @@
             50% { border-color: #1e3a5f; }
         }
 
-        /* GIF al final */
+        /* GIF al final (Ajustado a 200px) */
         #namesGif {
-            margin-top: 25px; /* Espacio entre el texto y el gif */
-            max-width: 100px; /* Ajusta el tamaño del gif */
+            margin-top: 25px; 
+            max-width: 200px; /* <--- GIF MÁS GRANDE */
             height: auto;
-            display: block; /* Para centrarlo */
+            display: block; 
             margin-left: auto;
             margin-right: auto;
-            border-radius: 5px; /* Bordes suaves para el gif */
+            border-radius: 5px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.15);
         }
 
@@ -220,18 +220,18 @@
             </ol>
 
             <div class="submit-container">
-                <button type="submit">Enviar, Corregir y Descargar Notas (Doble Archivo TXT)</button>
+                <button type="submit">Enviar y Descargar Notas</button>
             </div>
             
             <div class="registro-note">
-                **NOTA IMPORTANTE PARA EL INSTRUCTOR:** Se descargarán **DOS** archivos. El segundo (`Registro_Notas_Romanticismo.txt`) contiene la nota a registrar. **Debe copiar su contenido** y pegarlo en su registro centralizado para acumular todas las calificaciones. 
+                **NOTA IMPORTANTE PARA EL INSTRUCTOR:** Se descargará **UN** archivo. Oprimes en (`Registro_Notas_Romanticismo.txt`) ese archivo contiene la nota a registrar. 
             </div>
         </form>
         
     </div>
 
     <div id="finalScreen">
-        <h2>✅ Examen Finalizado con Éxito ✅</h2>
+        <h2 id="finalScreenTitle">✅ Examen Finalizado con Éxito ✅</h2>
         <div id="typingContainer">
             <div id="typingText"></div>
             <img id="namesGif" src="names.gif" alt="Animación de nombres">
@@ -241,7 +241,46 @@
 
 
     <script>
-        // --- 1. FUNCIÓN PARA EL EFECTO DE MÁQUINA DE ESCRIBIR ---
+        // *** BLOQUEO POR DISPOSITIVO: CLAVE PARA EL ALMACENAMIENTO LOCAL ***
+        const COMPLETION_KEY = 'examenRomanticismoCompletado';
+
+        // --- FUNCIÓN DE VERIFICACIÓN AL CARGAR LA PÁGINA (Se llama al final) ---
+        function checkCompletionStatus() {
+            if (localStorage.getItem(COMPLETION_KEY) === 'true') {
+                const examContainer = document.getElementById('examContainer');
+                const finalScreen = document.getElementById('finalScreen');
+                
+                examContainer.style.display = 'none';
+                
+                finalScreen.style.display = 'block';
+                finalScreen.classList.add('visible');
+                
+                document.getElementById('finalScreenTitle').innerHTML = '🔒 Examen ya completado en este dispositivo 🔒';
+
+                const groupText = 
+                    `Ya has realizado este examen previamente.
+                    
+                    Tu participación ha sido registrada con tu nota final. 
+                    El sistema impide realizarlo más de una vez para asegurar la equidad.
+
+                    Grupo conformado por:
+                    * Juan Arenas
+                    * Victor Lopez
+                    * Leandro Sehuanes
+                    * Santiago Vasquez
+                    * Damian Ramirez`;
+                
+                typeWriter(groupText, document.getElementById('typingText'), 30);
+                
+                document.getElementById('closeButton').style.display = 'none';
+                document.getElementById('namesGif').style.display = 'none';
+                
+                return true; 
+            }
+            return false; 
+        }
+
+        // --- FUNCIÓN PARA EL EFECTO DE MÁQUINA DE ESCRIBIR ---
         function typeWriter(text, element, delay = 40) {
             let i = 0;
             element.innerHTML = ''; 
@@ -268,7 +307,7 @@
             typing();
         }
 
-        // --- 2. FUNCIÓN DE DESCARGA (Centralizada) ---
+        // --- FUNCIÓN DE DESCARGA (Centralizada) ---
         function downloadFile(content, fileName, fileType = 'text/plain;charset=utf-8') {
             const blob = new Blob([content], { type: fileType });
             const a = document.createElement('a');
@@ -281,9 +320,15 @@
             URL.revokeObjectURL(a.href);
         }
 
-        // --- 3. GESTIÓN DEL FORMULARIO Y CALIFICACIÓN ---
+        // --- GESTIÓN DEL FORMULARIO Y CALIFICACIÓN ---
         document.getElementById('romanticismExamForm').addEventListener('submit', function(event) {
             event.preventDefault(); 
+
+            // BLOQUEO: Si ya se completó en este dispositivo, detiene el proceso de envío.
+            if (localStorage.getItem(COMPLETION_KEY) === 'true') {
+                 alert('⚠️ Este examen ya fue completado y registrado desde este dispositivo. No es posible enviarlo de nuevo.');
+                 return; 
+            }
             
             const studentName = document.getElementById('studentName').value.trim();
             const examContainer = document.getElementById('examContainer');
@@ -302,7 +347,7 @@
             let correctCount = 0;
             const userResponses = {};
             
-            // Recopilar y Calificar
+            // ... (Código de Calificación)
             for (let pair of formData.entries()) {
                 if (pair[0].startsWith('q')) {
                     const questionId = pair[0];
@@ -323,9 +368,7 @@
             const formattedGrade = finalGrade.toFixed(2); 
 
             
-            // =========================================================
             // PASO A: GENERAR EL ARCHIVO INDIVIDUAL DEL ALUMNO (con detalle)
-            // =========================================================
             let resultsAlumno = `
 ==================================================
         RESULTADO DEL EXAMEN: EL ROMANTICISMO
@@ -356,22 +399,19 @@ Q${questionNumber}: ${status}
             downloadFile(resultsAlumno, `Romanticismo_${safeName}.txt`);
 
 
-            // =========================================================
             // PASO B: GENERAR EL ARCHIVO DE REGISTRO CENTRAL (Solo una línea)
-            // =========================================================
-            // Formato: Fecha | Nombre Estudiante (Relleno con espacios) | Nota
             const dateStr = new Date().toLocaleDateString('es-CO');
-            // Usamos substr y padEnd para simular el formato de tabla en TXT
             const namePadded = studentName.substr(0, 29).padEnd(30); 
             const registroLine = `${dateStr} | ${namePadded} | Nota: ${formattedGrade} (${correctCount}/${totalQuestions})\n`;
             
-            // Se genera el archivo de registro para que el instructor lo copie
             downloadFile(registroLine, `Registro_Notas_Romanticismo.txt`);
 
             
-            // =========================================================
-            // 4. TRANSICIÓN A LA PANTALLA FINAL
-            // =========================================================
+            // MARCAR COMO COMPLETADO
+            localStorage.setItem(COMPLETION_KEY, 'true'); 
+
+
+            // TRANSICIÓN A LA PANTALLA FINAL
             
             alert(`¡Examen completado y CORREGIDO, ${studentName}!\n\nTu nota es: ${formattedGrade}.\n\nSe han descargado DOS archivos TXT: Tu detalle y la línea de registro. Por favor, revisa tus descargas.`);
 
@@ -386,12 +426,14 @@ Q${questionNumber}: ${status}
                 finalScreen.style.display = 'block';
                 finalScreen.classList.add('visible');
 
+                // Asegura que el título sea el de éxito si se hizo el submit
+                document.getElementById('finalScreenTitle').innerHTML = '✅ Examen Finalizado con Éxito ✅'; 
+
                 const groupText = 
                     `Gracias por su participación en este examen.
 
 Este proyecto ha sido desarrollado por:
 
-Grupo conformado por:
 * Juan Arenas
 * Victor Lopez
 * Leandro Sehuanes
@@ -400,13 +442,16 @@ Grupo conformado por:
                 
                 typeWriter(groupText, document.getElementById('typingText'), 40);
                 
-                // Mostrar el GIF después de que el texto termine de escribirse
-                const gifElement = document.getElementById('namesGif');
-                gifElement.style.display = 'block'; // Asegura que el GIF se muestre
+                // Mostrar el GIF 
+                const gifElement = document.getElementById('names.gif');
+                gifElement.style.display = 'block'; 
 
             }, 500);
 
         });
+
+        // *** LLAMADA INICIAL: VERIFICAR AL CARGAR LA PÁGINA ***
+        checkCompletionStatus();
     </script>
 
 </body>
